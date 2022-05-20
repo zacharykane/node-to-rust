@@ -1,5 +1,10 @@
 use std::{collections::HashMap, fs::read_to_string};
 
+mod lights {
+    pub mod light;
+}
+use lights::light::{HouseLight, Light, TrafficLight};
+
 fn main() {
     // a borrowed string slice
     // not a String
@@ -27,6 +32,34 @@ fn main() {
     println!("{}", map.get("key3").unwrap_or(&" default "));
 
     everything_is_an_expression();
+
+    // super basic way to use a struct
+    // adding and changing content
+    let mut hazard_light = HazardLight {
+        color: "red".to_owned(),
+    };
+    // we don't need implementation or traits yet
+    println!("{}", hazard_light.color);
+    hazard_light.color = "blue".to_string();
+    println!("{}", hazard_light.color);
+
+    // using a Struct with an Implementation
+    let mut traffic_light = TrafficLight::new();
+    println!("{}", traffic_light);
+    println!("{:?}", traffic_light);
+    // println!("{}", traffic_light.get_state());
+    traffic_light.turn_green();
+    println!("{}", traffic_light);
+    println!("{:?}", traffic_light);
+    // println!("{}", traffic_light.get_state());
+    traffic_light.turn_yellow();
+
+    let house_light = HouseLight::new();
+    println!("{}", house_light);
+    println!("{:?}", house_light);
+
+    print_state(&house_light);
+    print_state(&traffic_light);
 }
 
 fn greet(greeting: &str) {
@@ -53,4 +86,13 @@ fn everything_is_an_expression() {
     };
 
     println!("{}", message);
+}
+
+// function that accepts and argument that implements a Trait
+fn print_state(light: &impl Light) {
+    println!("{}'s state is: {:?}", light.get_name(), light.get_state());
+}
+
+struct HazardLight {
+    color: String,
 }
