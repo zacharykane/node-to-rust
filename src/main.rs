@@ -33,6 +33,36 @@ fn main() {
 
     everything_is_an_expression();
 
+    struct_stuff();
+}
+
+fn greet(greeting: &str) {
+    println!("{}", greeting);
+}
+
+fn print_borrowed_map(map: &HashMap<&str, String>) {
+    println!("{:#?}", map);
+    println!("{:#?}", map.get("Cargo"));
+    println!("{:#?}", map.get("CarNO"));
+}
+
+fn everything_is_an_expression() {
+    // such as control blocks!
+    let apples = 12;
+    // implicit returns let each conditional block
+    // return their last line (no semicolon)
+    let message = if apples > 10 {
+        "Lots of apples!"
+    } else if apples > 5 {
+        "Some apples."
+    } else {
+        "Not many apples really."
+    };
+
+    println!("{}", message);
+}
+
+fn struct_stuff() {
     // super basic way to use a struct
     // adding and changing content
     let mut hazard_light = HazardLight {
@@ -60,32 +90,6 @@ fn main() {
 
     print_state(&house_light);
     print_state(&traffic_light);
-}
-
-fn greet(greeting: &str) {
-    println!("{}", greeting);
-}
-
-fn print_borrowed_map(map: &HashMap<&str, String>) {
-    println!("{:#?}", map);
-    println!("{:#?}", map.get("Cargo"));
-    println!("{:#?}", map.get("CarNO"));
-}
-
-fn everything_is_an_expression() {
-    // such as control blocks!
-    let apples = 12;
-    // implicit returns let each conditional block
-    // return their last line (no semicolon)
-    let message = if apples > 10 {
-        "Lots of apples!"
-    } else if apples > 5 {
-        "Some apples."
-    } else {
-        "Not many apples really."
-    };
-
-    println!("{}", message);
 }
 
 // function that accepts and argument that implements a Trait
